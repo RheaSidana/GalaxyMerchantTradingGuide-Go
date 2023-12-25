@@ -10,9 +10,7 @@ func Execute(batchCommands [][]string) {
 		if isBlankLine(commandPerLine) {
 			continue
 		}
-
-		// fmt.Print("\nCommand: ")
-		// fmt.Println(commandPerLine)
+		
 		err := ProcessCommandIfAvailable(commandPerLine)
 		if err != nil {
 			fmt.Println(err.Error())
@@ -26,7 +24,6 @@ func isBlankLine(line []string) bool {
 }
 
 func ProcessCommandIfAvailable(command []string) error {
-	// fmt.Println("\nCommand : ", command)
 	result := commandsMap[command[0]]
 
 	if !isValidCommand(result) {
@@ -36,8 +33,6 @@ func ProcessCommandIfAvailable(command []string) error {
 		hasFoundIntergalacticCredit := hasFoundIntergalactic(credits)
 
 		isValidQues, res := isValidQues(command)
-		// fmt.Println("isValidQues: ", isValidQues)
-		// fmt.Println("res: ", res)
 		if !hasFoundIntergalacticSymbol &&
 			!hasFoundIntergalacticCredit &&
 			!isValidQues {
@@ -76,11 +71,12 @@ func isValidQues(command []string) (bool, func([]string) int) {
 	if command[0] == "how" {
 		howMuchIs := strings.Join(command[:3], " ")
 		res = commandsMap[howMuchIs]
+
 		if res == nil {
 			howManyCreditsIs :=  strings.Join(command[:4], " ")
 			res = commandsMap[howManyCreditsIs]
 		}
-		// return res != nil, res
+
 	}else if command[0] == "Does" {
 		res = commandsMap[command[0]]
 	} else if command[0] == "Is" || strings.Contains(command[0], "Is") {

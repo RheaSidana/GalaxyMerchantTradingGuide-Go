@@ -10,11 +10,9 @@ func HowMuchIsQues(
 	convertToInt func([]string, string) int,
 	REQUEST_INVALID_FORMAT string,
 ) {
-	// fmt.Println("in how much is")
 	responseString := ""
 	romanString := ""
 	for i := 3; i < len(command)-1; i++ {
-		// fmt.Println("comand :" + command[i])
 		responseString += command[i] + " "
 		if val, ok := symbols[command[i]]; ok {
 			romanString += val
@@ -35,12 +33,11 @@ func HowManyCreditsIsQues(
 	convertToInt func([]string, string) int,
 	REQUEST_INVALID_FORMAT string,
 ) {
-	// fmt.Println("in how much is")
+	
 	responseString := ""
 	romanString := ""
 	metalRate := 0.0
 	for i := 4; i < len(command)-1; i++ {
-		// fmt.Println("comand :" + command[i])
 		responseString += command[i] + " "
 		if val, ok := symbols[command[i]]; ok {
 			romanString += val
@@ -72,8 +69,6 @@ func DoesHasMoreOrLessQues(
 	convertToInt func([]string, string) int,
 	REQUEST_INVALID_FORMAT string,
 ) {
-	// fmt.Println("in how much is")
-	// responseString := ""
 	firstElement, secondElement,
 		romanStringOfFirstElement,
 		romanStringOfSecondElement,
@@ -127,7 +122,6 @@ func extractComparedStringDetails(command []string, word string, alt string) (
 	firstElementFound := false
 	thanFound := false
 	for i := 1; i < len(command)-2; i++ {
-		// fmt.Println("comand :" + command[i])
 		if command[i] == word || command[i] == alt {
 			firstElementFound = true
 		}
@@ -146,7 +140,6 @@ func extractComparedStringDetails(command []string, word string, alt string) (
 		} else if firstElementFound && !thanFound {
 
 			hasString += command[i] + " "
-			// fmt.Println(hasString)
 
 		} else if firstElementFound && thanFound {
 
@@ -201,9 +194,6 @@ func IsQues(
 		convertToInt,
 		REQUEST_INVALID_FORMAT,
 	)
-
-	// metalAmountFirstElement := conversionRateOfFirstElement * metalRateOfFirstElement
-	// metalAmountSecondElement := conversionRateOfSecondElement * metalRateOfSecondElement
 
 	if strings.Contains(hasString, "larger") &&
 		conversionRateOfFirstElement < conversionRateOfSecondElement {

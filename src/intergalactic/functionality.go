@@ -5,14 +5,8 @@ import (
 	"strconv"
 )
 
-func InitIntergalactic() {
-	createQues()
-}
-
 func CreateSymbols(command []string) {
 	symbols[command[0]] = command[2]
-	// fmt.Println("len", len(command[0]))
-	// fmt.Println("Symbol["+command[0]+"]:", symbols[command[0]])
 }
 
 func CreateMetals(
@@ -20,10 +14,6 @@ func CreateMetals(
 	convertToInt func([]string, string) int,
 	REQUEST_INVALID_FORMAT string,
 ) {
-	// symbols[command[0]] = command[2]
-	// fmt.Println("len", len(command[0]))
-	// fmt.Println("Metal: ", command)
-
 	res := ""
 	metal := ""
 	for _, word := range command {
@@ -43,8 +33,6 @@ func CreateMetals(
 	)
 
 	metals[metal] = metalValue
-
-	// fmt.Println("Metals["+metal+"]", metals[metal])
 }
 
 func calculateOneMetalEquals(
