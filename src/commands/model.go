@@ -18,7 +18,9 @@ const SYMBOL_FOUND = 1
 func CreateCommands() {
 	commandsMap["Convert"] = func(command []string) int {
 		conv := romanNumerals.ConvertToInt(command, REQUEST_INVALID_FORMAT)
-		fmt.Println(command[1] , " is ", conv)
+		if conv != 0 {
+			fmt.Println(command[1], " is ", conv)
+		}
 		return COMMAND_FOUND
 	}
 
