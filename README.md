@@ -45,3 +45,18 @@ go run . sample_inputs/<<input1.txt>>
 2. sample_inputs/input2.txt : contains the intergalactic symbols and metals for answering the questions.
 
 3. sample_inputs/input3.txt : contains the questions related to the intergalactic conversion.
+
+<br/>
+<br/>
+
+## Run Tests 
+###### Testing done for modules:
+./src/inputFile
+./src/commandLine
+
+##### Command: 
+
+```
+go test ./src/commandLine -v
+```
+###### change the modules accordingly
