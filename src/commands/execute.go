@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"strings"
 )
 
 func Execute(batchCommands [][]string) {
@@ -25,22 +26,32 @@ func isBlankLine(line []string) bool {
 }
 
 func ProcessCommandIfAvailable(command []string) error {
-	fmt.Println("Command : ", command)
+	// fmt.Println("\nCommand : ", command)
 	result := commandsMap[command[0]]
 
 	if !isValidCommand(result) {
 		symbol := intergalacticMap[command[1]]
 		credits := intergalacticMap[command[len(command)-1]]
+		hasFoundIntergalacticSymbol := hasFoundIntergalactic(symbol)
+		hasFoundIntergalacticCredit := hasFoundIntergalactic(credits)
 
-		if !hasFoundIntergalactic(symbol) && !hasFoundIntergalactic(credits) {
-				fmt.Println(REQUEST_INVALID_QUESTION)
-				return nil
+		isValidQues, res := isValidQues(command)
+		// fmt.Println("isValidQues: ", isValidQues)
+		// fmt.Println("res: ", res)
+		if !hasFoundIntergalacticSymbol &&
+			!hasFoundIntergalacticCredit &&
+			!isValidQues {
+
+			fmt.Println(REQUEST_INVALID_QUESTION)
+			return nil
 		}
 
-		if hasFoundIntergalactic(symbol){
+		if hasFoundIntergalacticSymbol {
 			result = symbol
-		}else{
+		} else if hasFoundIntergalacticCredit {
 			result = credits
+		} else {
+			result = res
 		}
 	}
 
@@ -58,4 +69,23 @@ func executeCommand(result func([]string) int, command []string) error {
 
 func hasFoundIntergalactic(result func([]string) int) bool {
 	return isValidCommand(result)
+}
+
+func isValidQues(command []string) (bool, func([]string) int) {
+	var res func([]string) int
+	if command[0] == "how" {
+		howMuchIs := strings.Join(command[:3], " ")
+		res = commandsMap[howMuchIs]
+		if res == nil {
+			howManyCreditsIs :=  strings.Join(command[:4], " ")
+			res = commandsMap[howManyCreditsIs]
+		}
+		// return res != nil, res
+	}else if command[0] == "Does" {
+		res = commandsMap[command[0]]
+	} else if command[0] == "Is" || strings.Contains(command[0], "Is") {
+		res = commandsMap["Is"]
+	}
+
+	return res != nil, res
 }

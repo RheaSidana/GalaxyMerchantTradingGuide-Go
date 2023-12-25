@@ -36,7 +36,7 @@ func ConvertToInt(command []string, invalidFormat string) int {
 		prev = curr
 	}
 
-	fmt.Println(command[1] , " is ", res)
+	// fmt.Println(command[1] , " is ", res)
 	return res
 }
 

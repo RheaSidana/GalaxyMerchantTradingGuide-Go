@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	intergalactic "galaxy_merchant_trading_guide/src/intergalactic"
 	romanNumerals "galaxy_merchant_trading_guide/src/romanNumerals"
 )
@@ -16,7 +17,44 @@ const SYMBOL_FOUND = 1
 
 func CreateCommands() {
 	commandsMap["Convert"] = func(command []string) int {
-		romanNumerals.ConvertToInt(command, REQUEST_INVALID_FORMAT)
+		conv := romanNumerals.ConvertToInt(command, REQUEST_INVALID_FORMAT)
+		fmt.Println(command[1] , " is ", conv)
+		return COMMAND_FOUND
+	}
+
+	commandsMap["how much is"] = func(command []string) int {
+		intergalactic.HowMuchIsQues(
+			command,
+			romanNumerals.ConvertToInt,
+			REQUEST_INVALID_FORMAT,
+		)
+		return COMMAND_FOUND
+	}
+
+	commandsMap["how many Credits is"] = func(command []string) int {
+		intergalactic.HowManyCreditsIsQues(
+			command,
+			romanNumerals.ConvertToInt,
+			REQUEST_INVALID_FORMAT,
+		)
+		return COMMAND_FOUND
+	}
+
+	commandsMap["Does"] = func(command []string) int {
+		intergalactic.DoesHasMoreOrLessQues(
+			command,
+			romanNumerals.ConvertToInt,
+			REQUEST_INVALID_FORMAT,
+		)
+		return COMMAND_FOUND
+	}
+
+	commandsMap["Is"] = func(command []string) int {
+		intergalactic.IsQues(
+			command,
+			romanNumerals.ConvertToInt,
+			REQUEST_INVALID_FORMAT,
+		)
 		return COMMAND_FOUND
 	}
 }
@@ -26,7 +64,7 @@ func CreateSymbols() {
 		intergalactic.CreateSymbols(symbols)
 		return SYMBOL_FOUND
 	}
-	
+
 	intergalacticMap["Credits"] = func(symbols []string) int {
 		intergalactic.CreateMetals(symbols, romanNumerals.ConvertToInt, REQUEST_INVALID_FORMAT)
 		return SYMBOL_FOUND
