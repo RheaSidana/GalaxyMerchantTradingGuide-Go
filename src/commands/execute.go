@@ -25,10 +25,23 @@ func isBlankLine(line []string) bool {
 }
 
 func ProcessCommandIfAvailable(command []string) error {
+	fmt.Println("Command : ", command)
 	result := commandsMap[command[0]]
 
 	if !isValidCommand(result) {
-		// return errors.New(INPUT_DATA_ERROR)
+		symbol := intergalacticMap[command[1]]
+		credits := intergalacticMap[command[len(command)-1]]
+
+		if !hasFoundIntergalactic(symbol) && !hasFoundIntergalactic(credits) {
+				fmt.Println(REQUEST_INVALID_QUESTION)
+				return nil
+		}
+
+		if hasFoundIntergalactic(symbol){
+			result = symbol
+		}else{
+			result = credits
+		}
 	}
 
 	return executeCommand(result, command)
@@ -41,4 +54,8 @@ func isValidCommand(result func([]string) int) bool {
 func executeCommand(result func([]string) int, command []string) error {
 	result(command)
 	return nil
+}
+
+func hasFoundIntergalactic(result func([]string) int) bool {
+	return isValidCommand(result)
 }

@@ -7,7 +7,7 @@ func BuildRomanNumerals() {
 	createRomanNumeralsNotRepeated()
 }
 
-func ConvertToInt(command []string, invalidFormat string) {
+func ConvertToInt(command []string, invalidFormat string) int {
 	romanNumeral := command[1]
 
 	prev := 0
@@ -19,14 +19,14 @@ func ConvertToInt(command []string, invalidFormat string) {
 			repeatedCount ++
 			if repeatedCount > 2 || RomanNumeralsNotRepeated[numeral]{
 				fmt.Println(invalidFormat)
-				return
+				return 0
 			}
 		}
 
 		if prev < curr {
 			if (prev == 5 || prev == 50 || prev == 500) {
 				fmt.Println(invalidFormat)
-				return
+				return 0
 			}
 			res += curr - (2 * prev)
 		} else {
@@ -37,5 +37,6 @@ func ConvertToInt(command []string, invalidFormat string) {
 	}
 
 	fmt.Println(command[1] , " is ", res)
+	return res
 }
 

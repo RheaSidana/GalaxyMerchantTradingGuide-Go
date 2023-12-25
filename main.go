@@ -25,5 +25,6 @@ func main() {
 
 	romannumerals.BuildRomanNumerals()
 	commands.CreateCommands()
+	commands.CreateSymbols()
 	commands.Execute(commandsList)
 }
